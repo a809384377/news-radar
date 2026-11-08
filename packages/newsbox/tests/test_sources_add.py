@@ -545,7 +545,11 @@ def test_neither_url_nor_from_file(
     app = make_app()
     r = runner.invoke(app, ["add", "--home", str(home)])
     assert r.exit_code != 0
-    assert "either url or --from-file" in (r.stderr + r.output)
+    # Rich may insert ANSI styles around --from-file on CI terminals.
+    # Assert the actual text, not its environment-dependent color escapes.
+    import re
+    plain = re.sub(r"\x1b\[[0-?]*[ -/]*[@-~]", "", r.stderr + r.output)
+    assert "either url or --from-file" in plain
 
 
 # ============================ --json （s9 Step 2） =========================
