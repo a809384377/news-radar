@@ -1,0 +1,32 @@
+# Secrets and machine-specific runtime state
+.env
+.env.*
+!.env.example
+**/*cookies*.json
+!**/*cookies*.example.json
+*.pem
+*.key
+*.db
+*.db-*
+*.db.*
+*.sqlite*
+.data/
+reports/
+.validation/
+.test-home/
+# Build/tool output
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+*.log
+.DS_Store
+# Private collaboration state
+ai/
+.claude/
+.codex/

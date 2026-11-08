@@ -1,0 +1,19 @@
+[project]
+name = "news-radar-workspace"
+version = "1.0.0"
+description = "Source collection, AI scoring and Markdown reports in one repository"
+requires-python = ">=3.11"
+dependencies = ["newsbox==1.0.4", "news-radar-ai==1.0.0"]
+
+[tool.uv]
+package = false
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
+[tool.uv.sources]
+newsbox = { workspace = true }
+news-radar-ai = { workspace = true }
+
+[dependency-groups]
+dev = ["pytest>=8.0", "hatchling>=1.27"]

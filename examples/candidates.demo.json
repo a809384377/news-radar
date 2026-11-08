@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "title": "Synthetic example: an AI model release",
+    "title_zh": "虚构演示：一个 AI 模型发布事件",
+    "url": "https://example.com/demo-model",
+    "source_id": "synthetic_official",
+    "source_tier": "official_first_party",
+    "final_score": 82,
+    "weighted_score": 92,
+    "experience_final_score": 30,
+    "track": "radar",
+    "summary_zh": "此条目仅用于展示行业雷达报告结构。事件、评分与摘要均为虚构，不代表真实产品发布。",
+    "content_type": "model_release"
+  },
+  {
+    "id": 2,
+    "title": "Synthetic example: a reproducible evaluation workflow",
+    "title_zh": "虚构演示：可复用的模型评估工作流",
+    "url": "https://example.com/demo-workflow",
+    "source_id": "synthetic_practitioner",
+    "source_tier": "kol",
+    "final_score": 60,
+    "weighted_score": 65,
+    "experience_final_score": 88,
+    "track": "experience",
+    "summary_zh": "此条目仅用于展示经验好帖板块。它是固定测试夹具，没有调用模型或采集真实文章。",
+    "content_type": "tutorial"
+  }
+]

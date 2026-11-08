@@ -1,0 +1,33 @@
+# ============================================================
+# news-radar-ai 默认配置（spec v2 §7.1，形态 D — Skill 编排 + DeepSeek）
+# 用户覆盖文件：~/.news-radar-ai/config.yaml
+# ============================================================
+
+upstream:
+  newsbox_raw_db_path: ~/.newsbox/raw.db    # SDK 默认就读这里，配置项主要为测试覆盖
+  fetch_freshness_threshold_hours: 4         # 超过 N 小时未 fetch → agent 触发 newsbox fetch
+
+llm:
+  provider: deepseek                          # 唯一外部 LLM
+  model: deepseek-v4-flash                    # DECISIONS D1
+  concurrency: 8                              # filter-score 并发上限；尊重 DeepSeek 5 rps 限流
+
+scoring:
+  selection_threshold: 65                     # 入库门槛：行业雷达 final_score ≥ 65 才进候选池（否则 filter_rejected）
+  experience_threshold: 65                    # 入库门槛：经验价值 ≥ 65 才进候选池
+  featured_threshold: 75                      # 精选门槛：agent 写报告时只挑此分以上进精选区（dual-track-scoring sprint）
+  source_bonus:                               # D3 只加行业雷达，不加经验价值
+    official_first_party: 5
+    kol: 0
+    secondary: -5
+
+report:
+  obsidian_vault_path: ~/Documents/ObsidianVault/AI Daily/
+  featured_max: 20                            # 精选条数兜底上限；本身是纵向判断（绝对门槛 + 事件性），20 仅防异常日塞爆
+  short_body_fetch_threshold: 500             # raw_body 字符数 ≤ 此阈值时，agent 在精选阶段用 WebFetch 拉原文补全
+
+logging:
+  level: info
+  file: ~/.news-radar-ai/logs/news-radar-ai.log
+  rotation: daily
+  retention_days: 30

@@ -1,0 +1,20 @@
+name: tests
+on: [push, pull_request]
+permissions:
+  contents: read
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.7.20"
+          python-version: ${{ matrix.python }}
+      - run: uv sync --locked --python ${{ matrix.python }}
+      - run: .venv/bin/python scripts/check.py
